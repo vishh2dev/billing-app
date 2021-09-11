@@ -1,0 +1,13 @@
+.form-control{
+    
+    width: 365px;
+}
+input.form-control:focus,textarea.form-control:focus{
+    background-color: #F0F0FF;
+}
+
+.error{
+    position: absolute;
+    color: red;
+    font-size: .9rem;
+}

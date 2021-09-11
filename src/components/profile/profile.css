@@ -1,0 +1,25 @@
+.profilecontainer{
+    flex: 6;
+    margin: 50px 50px;
+}
+/* 
+.profile{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+   
+    width: 60%;
+    margin: 19px 101px;
+  
+    padding: 16px;
+} */
+/* .profileInfo{
+    font-size: 19px;
+    width: 400px;
+    height: auto;
+    margin-top: 10px;
+}
+.profileHeading{
+    font-size: 30px;
+} */

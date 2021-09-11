@@ -1,0 +1,18 @@
+.customercontainer{
+    flex: 6;
+    margin: 50px 50px;
+    /* background-color: rgb(236, 139, 139); */
+    /* margin: 10px 20px; */
+    /* display: flex;
+    justify-content: space-between; */
+    /* padding: 0px 20px; */
+    /* box-shadow: 17px 10px 0px 0px rgba(0,0,0,0.25); */
+    /* -webkit-box-shadow: 17px 10px 0px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 17px 10px 0px 0px rgba(0,0,0,0.25); */
+}
+/* .now{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:1000px;
+} */

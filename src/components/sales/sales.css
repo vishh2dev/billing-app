@@ -1,0 +1,19 @@
+.salescontainer{
+    flex: 6;
+    margin: 20px 20px;
+   
+}
+/* .col-md-5{
+    border:  3px solid rgb(111,113,148);
+}
+.col-md-7{
+    border: 3px solid rgb(111,113,148);
+} */
+.col-md-1{
+    border: 1px solid rgb(111,113,148);
+    background-color: rgb(238,238,238);
+}
+.invoicecontainer{
+    flex: 6;
+    margin: 20px 20px;
+}
