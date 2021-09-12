@@ -4,6 +4,7 @@ import { Table,Button } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 
 import { startDeleteBill } from '../../actions/billAction'
+import { startGetSingleBill } from '../../actions/billAction'
 import './bills.css'
 
 
@@ -37,6 +38,7 @@ const BillsTable = (props) =>{
     }
 
     const handleView =(id)=>{
+        dispatch(startGetSingleBill(id))
         props.history.push(`/invoice/${id}`)
     }
 

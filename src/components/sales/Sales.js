@@ -5,11 +5,11 @@ import DatePicker from 'react-datepicker'
 
 import "react-datepicker/dist/react-datepicker.css"
 import { BsFillPersonFill } from "react-icons/bs"
-
+import {RiDeleteBack2Line} from "react-icons/ri"
 import CustomerTableForSales from './CustomerTableForSales'
 import ProductTableForSales from './ProductTableForSales'
 import { startCreateBill } from '../../actions/billAction'
-
+import { startGetSingleBill } from '../../actions/billAction'
 import './sales.css'
 
 const Sales = (props) =>{
@@ -92,6 +92,18 @@ const Sales = (props) =>{
          
      }
 
+    const handleDelete = (id) =>{
+        const newArr = products.filter((ele) =>{
+           return ele._id !== id
+        })
+        
+        const newAr = productDetails.filter((ele) =>{
+           return ele.product !== id
+        })
+        setProductDetails(newAr)
+        setProducts(newArr)  
+    }
+
     const priceCalculation = (quantity,price) =>{
         const sum = quantity * price
         return sum
@@ -111,6 +123,7 @@ const Sales = (props) =>{
     }
 
     const redirect = (id) =>{
+        dispatch(startGetSingleBill(id))
         props.history.push(`/invoice/${id}`)
     }
     
@@ -176,8 +189,11 @@ const Sales = (props) =>{
                                             {ele.quantity}
                                             <button onClick={() =>{handleDecrease(ele._id)}} disabled={ele.quantity === 1} >-</button> x {ele.price}
                                         </div>
-                                        <div className="col-md-5">
+                                        <div className="col-md-4">
                                             <span> {priceCalculation(ele.quantity,ele.price)}</span>
+                                        </div>
+                                        <div className="col-md-1">
+                                            <RiDeleteBack2Line onClick={() =>{handleDelete(ele._id)}} style={{cursor:'pointer'}}/>
                                         </div>
                                         <hr/>
                                     </div>

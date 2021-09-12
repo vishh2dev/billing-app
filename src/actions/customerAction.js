@@ -120,3 +120,13 @@ export const deleteCustomer = (id) =>{
         payload : id
     }
 }
+
+// sorting 
+
+export const sortByName = (value) => {
+    
+    return{
+         type: 'SORT_BY_NAME',
+         payload : value
+     }
+ }

@@ -77,6 +77,7 @@ const SideBar = (props) =>{
         
                 
                     <Switch>
+                    <Route  path="/" component={Dashboard} exact={true}/>
                             <Route  path="/dashboard" component={Dashboard} />
                             <Route  path="/customers" component={Customers} />
                             <Route  path="/products" component={Products} />

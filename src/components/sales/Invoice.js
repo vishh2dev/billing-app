@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react'
-import { useDispatch,useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import html2pdf from 'html2pdf.js'
-import { startGetSingleBill } from '../../actions/billAction'
+
 import './sales.css'
 
 const Invoice = (props) =>{
-    const {id} = props.match.params
-
-    const dispatch = useDispatch()
-
-    dispatch(startGetSingleBill(id))
+    
  
-    const bills = useSelector((state) =>{
-        return state.bills.billDetails
+    const [bills,products] = useSelector((state) =>{
+        return [state.bills.billDetails,state.products]
     })
     
     const handleClick = () =>{

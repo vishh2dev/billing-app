@@ -23,9 +23,9 @@ if(localStorage.getItem('token')){
 
 console.log('state',store.getState())
 
-// store.subscribe(() =>{
-//   console.log('state updated',store.getState())
-// })
+store.subscribe(() =>{
+  console.log('state updated',store.getState())
+})
 
 
 
