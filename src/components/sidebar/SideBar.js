@@ -27,7 +27,7 @@ const SideBar = (props) =>{
                 
                     <div className="sidebarWrapper">
                         <div className="sidebarMenu">
-                            <li className="sidebarList"><Link to="/dashboard" className="a"> Dashboard </Link></li>
+                            <li className="sidebarList "><Link to="/dashboard" className="a"> Dashboard </Link></li>
                         </div>
                     </div>
                     <div className="sidebarWrapper">

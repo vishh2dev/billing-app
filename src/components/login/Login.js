@@ -9,7 +9,7 @@ const Login = (props) =>{
             <div className="container mt-3"> 
                 <div className="row">
                 <div className="col-md-7">
-                        <img className="img-fluid w-100" src={loginImg}></img>
+                        <img className="img-fluid w-100" src={loginImg} alt="loginimage"></img>
                     </div>
                     <div className="col-md-5">
                        <Signin/>

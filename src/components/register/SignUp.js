@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import { Formik, Form} from 'formik'
 import * as Yup from 'yup'
 import {useDispatch} from 'react-redux'
@@ -66,4 +67,4 @@ const SignUp = (props) =>{
     )
 }
 
-export default SignUp
+export default withRouter(SignUp)

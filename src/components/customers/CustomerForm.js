@@ -44,15 +44,13 @@ const CustomerForm = (props) =>{
                
             >        
                 {formik => (
-                    <div>
-                      
-                       {/* {console.log(formik.values)} */}
+                    <div >
                         <Form>
                             <TextField name="name" type="text" placeholder="enter customer name" />
                             <TextField name="mobile" type="text" placeholder="enter customer phone number" />
                             <TextField name="email" type="email" placeholder="enter customer email" />
                             
-                            <Button variant="success " type="submit"> submit </Button>
+                            <Button variant="success " type="submit"  style={{margin:'20px 120px'}}> submit </Button>
                         </Form>
                     </div>
                 )}

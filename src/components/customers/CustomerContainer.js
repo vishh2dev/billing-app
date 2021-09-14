@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import { Button, Modal } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Pagination from '../Pagination'
 import SearchCustomer from  './SearchCustomer'
 import CustomerTable from './CustomerTable'
 import AddCustomer from './AddCustomer'
-import { sortByName } from '../../actions/customerAction'
+import {sorting} from '../../helpers/sorting'
 import './customer.css'
 
 const CustomerContainer = (props) =>{
@@ -22,69 +22,43 @@ const CustomerContainer = (props) =>{
     const customers = useSelector((state) =>{
         return state.customers
     })
-   
-    const dispatch = useDispatch()
 
     useEffect(() =>{
         setTotalPages(Math.ceil(customers.length / 5))
-        setCustomerResult(customers)
+        setCustomerResult([...customers])
     },[customers])
 
+    
     const handleSearch = (e) =>{
         const result = e.target.value
         setSearchTerm(result)
         searchFunction(result)
 
     }
-    // const sortAsc = (arr,field) => {
-    //     return arr.sort(function (a, b) {
-           
-    //         const movieA = a[field]
-    //         const movieB = b[field]
-    //         if (movieA > movieB) {
-    //             return 1
-    //         }
-    //         if (movieB > movieA) {
-    //             return -1
-    //         }
-    //         return 0
-    //     })
-    //  }
-
-    //  const sortDesc =(arr,field) =>{
-    //     return arr.sort(function (a, b) {
-    //         const movieA = a[field]
-    //         const movieB = b[field]
-
-    //         if (movieA > movieB) {
-    //             return -1
-    //         }
-    //         if (movieB> movieA) {
-    //             return 1
-    //         }
-    //         return 0
-    //     })
-    //  }
+   
     const handleSort = (e) =>{
         const value = e.target.value
         setSortBy(value)
+        let sortedArray = []
         if(value === 'Name[A-Z]'){
-            dispatch(sortByName('asc'))
-        //   setCustomerResult(sortAsc(customerResult,'name'))  
+            sortedArray = sorting(customerResult,'name','Asc')
         } 
         else if(value === 'Name[Z-A]'){
-            dispatch(sortByName('desc'))
-        //   setCustomerResult(sortDesc(customerResult,'name'))  
+            sortedArray = sorting(customerResult,'name','Desc')
+
+        }else{
+            sortedArray=[...customers]
         }
+
+        setCustomerResult(sortedArray)
     }
    
     const searchFunction = (search) =>{
         const result = customers.filter((ele) =>{
-           if(ele.name.includes(search) || ele.mobile.includes(search)){
-            return ele
-           }
+           return ele.name.toLowerCase().includes(search.toLowerCase()) || ele.mobile.includes(search)
+           
         })
-        // console.log('container',result)
+        
         setCustomerResult(result)
     }
 
@@ -95,8 +69,7 @@ const CustomerContainer = (props) =>{
     const handlePageChange = (num) =>{
         setPage(num)
     }
-    
-
+   
     return(
         <div className="customercontainer">
             
@@ -130,11 +103,6 @@ const CustomerContainer = (props) =>{
                 <Modal.Body>
                     <AddCustomer handleClose={handleClose} />
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        close Button
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </div>
     )

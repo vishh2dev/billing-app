@@ -33,11 +33,10 @@ const ProductTableForSales = (props) =>{
 
     const searchFunction = (search) =>{
         const result = products.filter((ele) =>{
-           if(ele.name.includes(search)){
-            return ele
-           }
+           return ele.name.toLowerCase().includes(search.toLowerCase())
+           
         })
-        // console.log('container',result)
+        
         setProductResult(result)
     }
 

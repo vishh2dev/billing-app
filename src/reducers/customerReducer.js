@@ -2,36 +2,6 @@ const customerInitialState = []
 
 const customerReducer = (state=customerInitialState,action) =>{
 
-    function sortAsc(arr,field) {
-        return arr.sort(function (a, b) {
-           
-            const movieA = a[field]
-            const movieB = b[field]
-            if (movieA > movieB) {
-                return 1
-            }
-            if (movieB > movieA) {
-                return -1
-            }
-            return 0
-        })
-     }
-
-     function sortDesc(arr,field) {
-        return arr.sort(function (a, b) {
-            const movieA = a[field]
-            const movieB = b[field]
-
-            if (movieA > movieB) {
-                return -1
-            }
-            if (movieB> movieA) {
-                return 1
-            }
-            return 0
-        })
-     }
-
     switch(action.type){
 
         case 'GET_CUSTOMER':{
@@ -62,17 +32,6 @@ const customerReducer = (state=customerInitialState,action) =>{
             )
         }
          
-        case 'SORT_BY_NAME':{
-           
-           
-            if(action.payload === "asc"){
-                sortAsc(state,'name')
-            }
-            else if(action.payload === "desc"){
-                sortDesc(state,'name')
-            }
-        
-        }
 
         default:{
             return [...state]

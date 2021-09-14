@@ -44,7 +44,7 @@
 .sidebarList.active,
 .sidebarList:hover {
   background-color: aqua;
-  color:red;
+  /* color:red; */
 }
 
 

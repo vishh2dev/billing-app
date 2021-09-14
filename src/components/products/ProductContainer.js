@@ -1,19 +1,21 @@
 import React,{useState,useEffect} from 'react'
 import { Button, Modal } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Pagination from '../Pagination'
 import AddProduct from './AddProduct'
 import ProductTable from './ProductTable'
 import SearchProducts from './SearchProducts'
+import {sorting} from '../../helpers/sorting'
 import './product.css'
 const ProductContainer = (props) =>{
     const [searchTerm,setSearchTerm] = useState('')
-    const[show,setShow] = useState(false)
+    const [show,setShow] = useState(false)
     const [productResult,setproductResult] = useState([])
     const [page,setPage] = useState(1)
     const [totalPages,setTotalPages] = useState(0)
-    
+    const [sortBy,setSortBy] = useState('')
+
     const startIndex = (page - 1) * 5
 
     const products = useSelector((state) =>{
@@ -22,7 +24,7 @@ const ProductContainer = (props) =>{
 
     useEffect(() =>{
         setTotalPages(Math.ceil(products.length / 5))
-        setproductResult(products)
+        setproductResult([...products])
     },[products])
 
     const handleSearch = (e) =>{
@@ -34,12 +36,32 @@ const ProductContainer = (props) =>{
 
     const searchFunction = (search) =>{
         const result = products.filter((ele) =>{
-           if(ele.name.includes(search)){
-            return ele
-           }
+           return ele.name.toLowerCase().includes(search.toLowerCase())
         })
-        // console.log('container',result)
+        
         setproductResult(result)
+    }
+
+    const handleSort = (e) =>{
+        const value = e.target.value
+        setSortBy(value)
+        let sortedArray = []
+        if(value === 'Name[A-Z]'){
+            sortedArray = sorting(productResult,'name','Asc')
+        } 
+        else if(value === 'Name[Z-A]'){
+            sortedArray = sorting(productResult,'name','Desc')
+
+        }else if(value === 'priceHigh'){
+            sortedArray = sorting(productResult,'price','numDesc')
+        }else if(value === 'priceLow'){
+            sortedArray = sorting(productResult,'price','numAsc')
+        }
+        else{
+            sortedArray=[...products]
+        }
+
+        setproductResult(sortedArray)
     }
 
     const handleShow = () => setShow(true)
@@ -50,7 +72,6 @@ const ProductContainer = (props) =>{
         setPage(num)
     }
     
-    
     return(
         <div className="productcontainer">
             <div className="row">
@@ -58,7 +79,13 @@ const ProductContainer = (props) =>{
                     <SearchProducts searchTerm={searchTerm} handleSearch={ handleSearch}/>
                 </div>
                 <div className="col-md-5">
-                    <SearchProducts searchTerm={searchTerm} handleSearch={ handleSearch}/>
+                    <select value={sortBy} onChange={handleSort}>
+                        <option value="">sort product</option>
+                        <option value="Name[A-Z]">Name [A-Z]</option>
+                        <option value="Name[Z-A]">Name [Z-A]</option>
+                        <option value="priceHigh">price High</option>
+                        <option value="priceLow">price Low</option>
+                    </select>
                 </div>
                 <div className="col-md-2">
                     <Button onClick={handleShow} variant="primary"> + Add product</Button>
@@ -78,11 +105,6 @@ const ProductContainer = (props) =>{
                 <Modal.Body>
                     <AddProduct handleClose={handleClose} />
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        close Button
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </div>
     )

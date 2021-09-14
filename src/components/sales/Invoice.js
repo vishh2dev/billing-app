@@ -1,30 +1,64 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Table } from 'react-bootstrap'
+import { Table,Button } from 'react-bootstrap'
 import html2pdf from 'html2pdf.js'
 
 import './sales.css'
+import {modifyDate} from '../../helpers/sorting'
+
 
 const Invoice = (props) =>{
     
  
-    const [bills,products] = useSelector((state) =>{
-        return [state.bills.billDetails,state.products]
+    const [bills,products,customers] = useSelector((state) =>{
+        return [state.bills.billDetails,state.products,state.customers]
     })
     
-    const handleClick = () =>{
-        props.history.push('/bills')  
+    // const handleClick = () =>{
+    //     props.history.push('/bills')  
+    // }
+
+    const getcustomer = (id,identifier) =>{
+        const newArr = customers.filter((ele) => ele._id === id)
+        const newObj = newArr.shift()
+        if(newObj){
+            if(identifier === 'name'){
+                return newObj.name
+            }else{
+                return newObj.mobile
+            }
+            
+        }
+       
+    }
+
+    const getProduct = (id) =>{
+        const newArr = products.filter((ele) => ele._id === id)
+        const newObj = newArr.shift()
+        if(newObj){
+            return newObj.name 
+        }
     }
 
     const handlePdf =() =>{
         const element = document.getElementById('pdf')
-        html2pdf(element)
+        const opt = {
+            margin:       1,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 1 },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+          }
+        html2pdf().set(opt).from(element).save()
     }
-
+   
     return(
         <div className="invoicecontainer">
         <div id='pdf'>
            <h2>INVOICE</h2>
+           <p style={{fontWeight:'bold'}}>Date : {modifyDate(bills.date)}</p>
+           <p style={{fontWeight:'bold'}}>customer name : {getcustomer(bills.customer,'name')}</p>
+           <p style={{fontWeight:'bold'}}>customer phone :{getcustomer(bills.customer,'mobile')}</p>
            <Table border="1">
                 <thead>
                     <tr>
@@ -43,7 +77,7 @@ const Invoice = (props) =>{
                                                                     return(
                                                                         <tr key={ele._id}>
                                                                             <td>{i+1}</td>
-                                                                            <td>{ele.product}</td>
+                                                                            <td>{getProduct(ele.product)}</td>
                                                                             <td>{ele.price}</td>
                                                                             <td>{ele.quantity}</td>
                                                                             <td>{ele.subTotal}</td>
@@ -56,15 +90,28 @@ const Invoice = (props) =>{
                         
                         }  
                        
-                </tbody>
                 
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>{bills.total}</td>
+                        </tr>
+                </tbody>
             </Table>
-            Total -{bills.total}
+            {/* Total -{bills.total} */}
             
            
         </div>
-        <button onClick={handleClick}>ok</button>
-            <button onClick={handlePdf}>generate pdf</button>
+        
+        
+        <div className="mx-auto" style={{width: '200px'}}>
+            <Button onClick={handlePdf} className="ml-2">generate pdf</Button>
+        </div>
+
+        <Link to="/bills">go back</Link>
+        
         </div>
     )
 }

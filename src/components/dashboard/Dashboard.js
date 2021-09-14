@@ -1,20 +1,10 @@
-import React,{ useEffect, useState} from 'react'
-import { useDispatch,useSelector } from 'react-redux'
-
-import { startGetCustomer } from '../../actions/customerAction'
-import { startGetProduct } from '../../actions/productAction'
-import { startGetAllBill } from '../../actions/billAction'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import './dashboard.css'
 
 const Dashboard = (props) =>{
-    const dispatch = useDispatch()
-    
-    // useEffect(()=>{
-    //    dispatch(startGetCustomer())
-    //    dispatch(startGetProduct())
-    //    dispatch(startGetAllBill())
-    // },[])
+   
 
 
     const [customers,products,bills] = useSelector((state) =>{

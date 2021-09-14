@@ -121,12 +121,3 @@ export const deleteCustomer = (id) =>{
     }
 }
 
-// sorting 
-
-export const sortByName = (value) => {
-    
-    return{
-         type: 'SORT_BY_NAME',
-         payload : value
-     }
- }

@@ -37,14 +37,12 @@ const ProductForm = (props) =>{
             >        
                 {formik => (
                     <div>
-                       
-                       {/* {console.log(formik.values)} */}
                         <Form>
                             <TextField name="name" type="text" placeholder="enter product name" />
                             <TextField name="price" type="text" placeholder="enter product price" />
                             
                             
-                            <Button variant="success"  type="submit">submit</Button >
+                            <Button variant="success"  type="submit"  style={{margin:'20px 120px'}}>submit</Button >
                         </Form>
                     </div>
                 )}
