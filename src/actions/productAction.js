@@ -1,8 +1,9 @@
-import axios from "axios"
+// import axios from "axios"
+import axios from '../config/axios-config'
 
 export const startGetProduct = () =>{
     return(dispatch) =>{
-        axios.get('http://dct-billing-app.herokuapp.com/api/products' ,{
+        axios.get('/products' ,{
             headers:{
                 'Authorization':  `Bearer ${localStorage.getItem('token')}`
             }
@@ -33,7 +34,7 @@ export const getProducts = (value) =>{
 
 export const startAddProduct = (productData,handleClose) =>{
     return(dispatch) =>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/products',productData,{
+        axios.post('/products',productData,{
             headers:{
                 'Authorization':  `Bearer ${localStorage.getItem('token')}`
             }
@@ -66,7 +67,7 @@ export const addProduct = (value) =>{
 export const startEditProduct = (data,id,handleClose) => {
 
     return(dispatch) =>{
-        axios.put(`http://dct-billing-app.herokuapp.com/api/products/${id}`,data ,{
+        axios.put(`/products/${id}`,data ,{
             headers:{
                 'Authorization':  `Bearer ${localStorage.getItem('token')}`
             }
@@ -95,7 +96,7 @@ export const startDeleteProduct = (id) =>{
    
         return(dispatch)=>{
             if(confirm){
-            axios.delete(`http://dct-billing-app.herokuapp.com/api/products/${id}`,{
+            axios.delete(`/products/${id}`,{
                 headers:{
                     'Authorization':  `Bearer ${localStorage.getItem('token')}`
                 }

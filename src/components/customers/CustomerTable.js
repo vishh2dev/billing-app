@@ -76,11 +76,6 @@ const CustomerTable = (props) =>{
                 <Modal.Body>
                     <EditCustomer handleClose={handleClose} id={id}/>  
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        close Button
-                    </Button>
-                </Modal.Footer> */}
             </Modal>
         
         </div>

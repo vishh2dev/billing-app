@@ -1,10 +1,12 @@
-import axios from "axios"
+import axios from '../config/axios-config'
+import swal from 'sweetalert2'
+
 
 // api for customer creation
 
 export const startAddCustomer = (customerData,handleClose) =>{
     return(dispatch) =>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/customers',customerData,{
+        axios.post('/customers',customerData,{
             headers:{
                 'Authorization':  `Bearer ${localStorage.getItem('token')}`
             }
@@ -14,7 +16,10 @@ export const startAddCustomer = (customerData,handleClose) =>{
                 if(result.hasOwnProperty('errors')){
                     alert(result.errors)
                 }else{
-                    alert('successfully created')
+                    swal.fire({
+                        icon: 'success',
+                        title: 'successfully created',
+                      })
                     dispatch(addCustomer(result))
                     handleClose()
                 }
@@ -36,7 +41,7 @@ export const addCustomer = (value) =>{
 
 export const startGetCustomer = () =>{
     return(dispatch) =>{
-        axios.get('http://dct-billing-app.herokuapp.com/api/customers' ,{
+        axios.get('/customers' ,{
             headers:{
                 'Authorization':  `Bearer ${localStorage.getItem('token')}`
             }
@@ -68,7 +73,7 @@ export const getCustomer = (value) =>{
 export const startEditCustomer = (data,id,handleClose) => {
 
     return(dispatch) =>{
-        axios.put(`http://dct-billing-app.herokuapp.com/api/customers/${id}`,data ,{
+        axios.put(`/customers/${id}`,data ,{
             headers:{
                 'Authorization':  `Bearer ${localStorage.getItem('token')}`
             }
@@ -94,23 +99,41 @@ export const editCustomer = (data) =>{
 // api for deleting a customer
 
 export const startDeleteCustomer = (id) =>{
-    const confirm = window.confirm('are you sure')
+    // const confirm = window.confirm('are you sure')
    
         return(dispatch)=>{
-            if(confirm){
-            axios.delete(`http://dct-billing-app.herokuapp.com/api/customers/${id}`,{
-                headers:{
-                    'Authorization':  `Bearer ${localStorage.getItem('token')}`
+            swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((res) => {
+                if (res.isConfirmed) {
+                    axios.delete(`/customers/${id}`,{
+                        headers:{
+                            'Authorization':  `Bearer ${localStorage.getItem('token')}`
+                        }
+                    })
+                    .then((response) =>{
+                        const result = response.data
+                        dispatch(deleteCustomer(result._id))
+                    })
+                    .catch((err) =>{
+                        console.log(err)
+                    })
+                  swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
                 }
-            })
-            .then((response) =>{
-                const result = response.data
-                dispatch(deleteCustomer(result._id))
-            })
-            .catch((err) =>{
-                console.log(err)
-            })
-        }}
+              })
+           
+            
+        }
          
 }
 

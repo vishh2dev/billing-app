@@ -13,21 +13,21 @@ const Profile = (props) =>{
     return(
         <div className="profilecontainer">
             <span className="profileHeading">Account Details</span>
-                <div className="profileInfo">
-                    <span> Username : {user.userDetails.username}</span>
-                </div>
+            <div className="profileInfoContainer">
+                <span className="profileInfo"> Username : {user.userDetails.username}</span>
+            </div>
 
-                <div className="profileInfo">
-                    <span>Email :{user.userDetails.email} </span>
-                </div>
+            <div className="profileInfoContainer">
+                <span className="profileInfo">Email :{user.userDetails.email} </span>
+            </div>
 
-                <div className="profileInfo">
-                    <span> Business Name : {user.userDetails.businessName}</span>
-                </div>
+            <div className="profileInfoContainer">
+                <span className="profileInfo"> Business Name : {user.userDetails.businessName}</span>
+            </div>
 
-                <div className="profileInfo">
-                    <span>  Address : {user.userDetails.address}</span>
-                </div>
+            <div className="profileInfoContainer">
+                <span className="profileInfo">  Address : {user.userDetails.address}</span>
+            </div>
         </div>
     )
 }

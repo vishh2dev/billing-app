@@ -9,7 +9,7 @@ const customerReducer = (state=customerInitialState,action) =>{
         }
 
         case 'ADD_CUSTOMER':{
-            return[...state,{...action.payload}]
+            return[{...action.payload},...state]
         }
 
         case 'EDIT_CUSTOMER' : {

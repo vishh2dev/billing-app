@@ -1,7 +1,5 @@
 .displaycontainer{
   display: flex;
-  /* margin-top: 2px; */
-
 }
 
 .sidebar{
@@ -12,39 +10,25 @@
     top: 50px;
 }
 .sidebarWrapper {
-  /* margin: 0;
-  padding: 5px; */
  text-decoration: none;
-  /* border: .5px solid #bbbaba; */
-
-  /* margin-bottom: 10px; */
 }
-
-
-
 .sidebarList {
-  
-  /* text-decoration: none; */
   padding: 10px 30px;
   list-style: none;
   cursor: pointer;
-  /* display: flex;
-  align-items: center; */
-    /* border-radius: 10px; */
-  /* padding: 5px; */
 }
 .a{
+  
   text-decoration: none;
   color: white;
   font-size: 15px;
 }
 
-
-
-.sidebarList.active,
 .sidebarList:hover {
-  background-color: aqua;
-  /* color:red; */
+  background-color: rgb(23,27,33);
+}
+.sidebarList:active{
+  background-color: rgb(23,27,33);
 }
 
 

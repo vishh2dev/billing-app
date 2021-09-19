@@ -4,7 +4,7 @@ import { useSelector} from 'react-redux'
 import { withRouter } from 'react-router'
 
 import './app.css'
-import NavbarComponent from './components/Navbar.js'
+import NavbarComponent from './components/mainpage/Navbar'
 import SideBar from './components/sidebar/SideBar'
 import Topbar from './components/Topbar'
 

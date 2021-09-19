@@ -62,7 +62,7 @@ const SideBar = (props) =>{
                         localStorage.removeItem('token')
                         dispatch(isLogout(false))
                         alert('successfully logout')
-                        props.history.push('/')
+                        props.history.push('/login')
                     }} className="a">logout</Link>
                             </li>
                         </div>

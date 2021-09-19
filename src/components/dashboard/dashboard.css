@@ -1,8 +1,12 @@
-.dashboardcontainer{
+.dash{
+    flex: 6;
+    margin: 20px 20px;
+}
+/* .dashboardcontainer{
     flex: 6;
     margin: 10px 20px;
     
-}
+} */
 .dashboard{
     width: 100%;
     display: flex;

@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const Pagination = (props) =>{
     const { totalPages,handlePageChange } =props
     const pages = [...Array(totalPages).keys()].map((num => num + 1))
@@ -12,7 +11,7 @@ const Pagination = (props) =>{
                     return <button key={num}
                         onClick={() => {
                         handlePageChange(num)
-                    }}> {num} </button>
+                    }} className="btn btn-outline-primary"> {num} </button>
                 })
             }
         </div>

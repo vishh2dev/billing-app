@@ -1,8 +1,9 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { Table,Button } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 
+import Pagination from '../Pagination'
 import { startDeleteBill } from '../../actions/billAction'
 import { startGetSingleBill } from '../../actions/billAction'
 
@@ -12,13 +13,24 @@ import './bills.css'
 const { DateTime } = require("luxon")
 
 const BillsTable = (props) =>{
-  
+    const [page,setPage] = useState(1)
+    const [totalPages,setTotalPages] = useState(0)
+
+    const startIndex = (page - 1) * 5
+
     const dispatch = useDispatch()
    
     const [bills,customers]=useSelector((state) =>{
         return [state.bills.bills,state.customers]
     })
 
+    useEffect(() =>{
+        setTotalPages(Math.ceil(bills.length / 5))
+    },[bills])
+
+    const handlePageChange = (num) =>{
+        setPage(num)
+    }
 
     const modifyDate = (date) =>{
         const cleanDate = date.split('T')
@@ -44,7 +56,7 @@ const BillsTable = (props) =>{
         dispatch(startGetSingleBill(id))
         props.history.push(`/invoice/${id}`)
     }
- 
+ console.log('page',totalPages);
     return(
         <div >
             <div className="row">
@@ -58,7 +70,6 @@ const BillsTable = (props) =>{
                                 <Table className= "table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>id</th>
                                             <th>date</th>
                                             <th>customer</th>
                                             <th>total</th>
@@ -69,10 +80,9 @@ const BillsTable = (props) =>{
                                     
                                             {   
                                                 
-                                                        bills.map((ele,i) =>{
+                                                        bills.slice(startIndex,startIndex + 5).map((ele,i) =>{
                                                             return(
                                                                 <tr key={ele._id}>
-                                                                    <td>{i+1}</td>
                                                                     <td>{modifyDate(ele.date)}</td>
                                                                     <td>{getcustomer(ele.customer)}</td>
                                                                     <td>{ele.total}</td>
@@ -96,7 +106,7 @@ const BillsTable = (props) =>{
         
             }
             </div>
-          
+            <Pagination totalPages={totalPages} handlePageChange={handlePageChange}/>
         </div>
     )
 }

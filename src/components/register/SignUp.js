@@ -46,7 +46,6 @@ const SignUp = (props) =>{
                     props.history.push('/login')
                 }
                 dispatch(startRegister(formData,redirect))
-                // console.log('data',values)
             }}
         >        
             {formik => (

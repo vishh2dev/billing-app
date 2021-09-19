@@ -1,20 +1,33 @@
-import axios from 'axios'
+import axios from '../config/axios-config'
+import swal from 'sweetalert2'
 
 // api call for registering a user into the app
 
 export const startRegister = (registerData,redirect) =>{
     return(dispatch)=>{
-        axios.post(' http://dct-billing-app.herokuapp.com/api/users/register',registerData)
+        axios.post('/users/register',registerData)
             .then((response) =>{
                 const result = response.data
                 if(result.hasOwnProperty('keyValue')){
                     if(result.keyValue.email){
-                        alert('email already exist')
+                        swal.fire({
+                            icon: 'error',
+                            text: 'Email already exist!'
+                        })
                     }else{
-                        alert('name already exist')
+                        swal.fire({
+                            icon: 'error',
+                            text: 'Name already exist!'
+                        })
                     } 
                 }else{
-                    alert('successfully registered')
+                    swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: 'successfully registered',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
                     dispatch(isRegister(true))
                     redirect()
                 }
@@ -37,21 +50,28 @@ export const isRegister = (value) =>{
 
 export const startLogin = (loginData,redirect) =>{
     return(dispatch) =>{
-        axios.post(' http://dct-billing-app.herokuapp.com/api/users/login',loginData)
+        axios.post('/users/login',loginData)
         .then((response) =>{
             const result = response.data
+            console.log(result);
             if(result.hasOwnProperty('errors')){
-                alert(result.errors)
+                swal.fire({
+                    icon: 'error',
+                    text: result.errors
+                })
             }
             else{
-                alert('successfully logged in')
+                // alert('successfully logged in')
                 localStorage.setItem('token',result.token)
                 dispatch(isLogin(true))
                 redirect()
             }
         })
         .catch((err) =>{
-            console.log(err)
+            swal.fire({
+                icon: 'error',
+                text: err.message
+            })
         })
 
     }
@@ -68,7 +88,7 @@ export const isLogin = (value) =>{
 
 export const startGetUserInfo = () =>{
     return(dispatch) =>{
-        axios.get(' http://dct-billing-app.herokuapp.com/api/users/account',{
+        axios.get('/users/account',{
             headers:{
                 'Authorization':  `Bearer ${localStorage.getItem('token')}`
             }
