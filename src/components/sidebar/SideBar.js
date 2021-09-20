@@ -10,6 +10,7 @@ import Profile from '../profile/Profile'
 import Sales from '../sales/Sales'
 import {isLogout}  from '../../actions/userAction'
 import Invoice from '../sales/Invoice'
+import PrivateRoutes from '../../helpers/PrivateRoutes'
 
 import './sidebar.css'
 
@@ -77,10 +78,10 @@ const SideBar = (props) =>{
         
                 
                     <Switch>
-                    <Route  path="/" component={Dashboard} exact={true}/>
-                            <Route  path="/dashboard" component={Dashboard} />
-                            <Route  path="/customers" component={Customers} />
-                            <Route  path="/products" component={Products} />
+                    {/* <Route  path="/" component={Dashboard} exact={true}/> */}
+                            <PrivateRoutes  path="/dashboard" component={Dashboard} exact />
+                            <PrivateRoutes  path="/customers" component={Customers} />
+                            <PrivateRoutes  path="/products" component={Products} />
                             <Route  path="/sales" component={Sales} />
                             <Route  path="/bills" component={Bills} />
                             <Route  path="/profile" component={Profile} />

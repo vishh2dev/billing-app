@@ -56,7 +56,7 @@ const BillsTable = (props) =>{
         dispatch(startGetSingleBill(id))
         props.history.push(`/invoice/${id}`)
     }
- console.log('page',totalPages);
+ 
     return(
         <div >
             <div className="row">

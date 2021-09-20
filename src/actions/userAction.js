@@ -1,5 +1,9 @@
 import axios from '../config/axios-config'
 import swal from 'sweetalert2'
+import { startGetCustomer } from './customerAction'
+import { startGetProduct } from './productAction'
+import { startGetAllBill } from './billAction'
+
 
 // api call for registering a user into the app
 
@@ -64,6 +68,10 @@ export const startLogin = (loginData,redirect) =>{
                 // alert('successfully logged in')
                 localStorage.setItem('token',result.token)
                 dispatch(isLogin(true))
+                dispatch(startGetCustomer())
+                dispatch(startGetProduct())
+                dispatch(startGetAllBill())
+                dispatch(startGetUserInfo())
                 redirect()
             }
         })
