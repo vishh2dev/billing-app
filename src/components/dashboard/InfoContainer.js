@@ -41,7 +41,7 @@ const InfoContainer = (props) =>{
                 </div>
 
                 <div className="dashboardItem">
-                    <span className="dashboardTitle"> Total Bills</span>
+                    <span className="dashboardTitle"> Total Sales</span>
                     <div className="dashboardInfoContainer">
                         <span className="dashboardInfo"> {bills && bills.length} </span>
                     </div>

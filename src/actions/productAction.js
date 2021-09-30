@@ -1,6 +1,8 @@
 // import axios from "axios"
 import axios from '../config/axios-config'
 
+// get all available products 
+
 export const startGetProduct = () =>{
     return(dispatch) =>{
         axios.get('/products' ,{
@@ -31,6 +33,7 @@ export const getProducts = (value) =>{
     }
 }
 
+// add a new product
 
 export const startAddProduct = (productData,handleClose) =>{
     return(dispatch) =>{
@@ -44,7 +47,7 @@ export const startAddProduct = (productData,handleClose) =>{
                 if(result.hasOwnProperty('errors')){
                     alert(result.errors)
                 }else{
-                    alert('successfully created')
+                    // alert('successfully created')
                     dispatch(addProduct(result))
                     handleClose()
                 }

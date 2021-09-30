@@ -1,6 +1,6 @@
-// import axios from "axios"
 import axios from '../config/axios-config'
 
+import swal from 'sweetalert2'
 
 // api call for getting all bill 
 
@@ -14,7 +14,10 @@ export const startGetAllBill = () =>{
             .then((response) =>{
                 const result = response.data
                 if(result.hasOwnProperty('errors')){
-                    alert(result.errors)
+                    swal.fire({
+                        icon: 'error',
+                        text: result.errors
+                    })
                 }else{
                     dispatch(getAllBill(result)) 
                 }
@@ -45,9 +48,18 @@ export const startCreateBill = (billData,redirect) =>{
             .then((response) =>{
                 const result = response.data
                 if(result.hasOwnProperty('errors')){
-                    alert(result.errors)
+                    swal.fire({
+                        icon: 'error',
+                        text: result.errors
+                    })
                 }else{
-                    alert('successfully Bill generated')
+                    // alert('successfully Bill generated')
+                    swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: 'Bill generation successfull',
+                        timer: 1000
+                      })
                     dispatch(createBill(result))
                     redirect(result._id)
                    
@@ -79,7 +91,10 @@ export const startDeleteBill = (id) =>{
             .then((response) =>{
                 const result = response.data
                 if(result.hasOwnProperty('errors')){
-                    alert(result.errors)
+                    swal.fire({
+                        icon: 'error',
+                        text: result.errors
+                    })
                 }else{
                     dispatch(deleteBill(result._id))
                 }
@@ -110,7 +125,10 @@ export const startGetSingleBill = (id) =>{
             .then((response) =>{
                 const result = response.data
                 if(result.hasOwnProperty('errors')){
-                    alert(result.errors)
+                    swal.fire({
+                        icon: 'error',
+                        text: result.errors
+                    })
                 }else{
                     dispatch(getSingleBill(result))
                 }
